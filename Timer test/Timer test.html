@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Timer test</title>
+    </head>
+    <body>
+        <script>
+            class TimerTest {
+                #maxTick = 10;
+                #interval = 500;
+                #tickCounter = 0;
+                #timerId = undefined;
+                start() {
+                    this.#timerId = setTimeout(this.#timerFunc.bind(this), 0);
+                    console.log("Timer started");
+                }
+                #timerFunc() {
+                    this.#tickCounter++;
+                    console.log(`tick #${this.#tickCounter}`);
+                    if (this.#tickCounter < this.#maxTick) {
+                        this.#timerId = setTimeout(this.#timerFunc.bind(this), this.#interval);
+                    }
+                    else {
+                        clearTimeout(this.#timerId);
+                        console.log("Timer stopped");
+                    }
+                }
+            }
+            var timerTest = new TimerTest();
+            timerTest.start();
+        </script>
+    </body>
+</html>
